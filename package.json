@@ -4,8 +4,8 @@
   "scripts": {
     "build": "turbo build",
     "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "ci": "biome ci . --config-path=biome.jsonc",
+    "check:fix": "biome check . --fix --config-path=biome.jsonc"
   },
   "devDependencies": {
     "@biomejs/biome": "^1.9.4",
