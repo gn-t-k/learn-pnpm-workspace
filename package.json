@@ -1,20 +1,20 @@
 {
-  "name": "learn-pnpm-workspace",
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "ci": "biome ci . --config-path=biome.jsonc",
-    "check:fix": "biome check . --fix --config-path=biome.jsonc"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "^1.9.4",
-    "prettier": "^3.2.5",
-    "turbo": "^2.3.3",
-    "typescript": "5.5.4"
-  },
-  "packageManager": "pnpm@9.0.0",
-  "engines": {
-    "node": ">=18"
-  }
+	"name": "learn-pnpm-workspace",
+	"private": true,
+	"scripts": {
+		"build": "turbo build",
+		"dev": "turbo dev",
+		"ci": "biome ci . --config-path=biome.jsonc",
+		"check:fix": "biome check . --fix --config-path=biome.jsonc"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "^1.9.4",
+		"prettier": "^3.2.5",
+		"turbo": "^2.3.3",
+		"typescript": "5.5.4"
+	},
+	"packageManager": "pnpm@9.0.0",
+	"engines": {
+		"node": ">=18"
+	}
 }
