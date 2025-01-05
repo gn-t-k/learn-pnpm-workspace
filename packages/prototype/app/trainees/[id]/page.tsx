@@ -1,32 +1,21 @@
 "use client";
 
 import { TrainingHeatmap } from "@/components/TrainingHeatmap";
-import {
-	AlertDialog,
-	AlertDialogAction,
-	AlertDialogCancel,
-	AlertDialogContent,
-	AlertDialogDescription,
-	AlertDialogFooter,
-	AlertDialogHeader,
-	AlertDialogTitle,
-	AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
+import { UserInfo } from "@/components/UserInfo";
+import { WeeklyGoal } from "@/components/WeeklyGoal";
 import { useAuth } from "@/hooks/useAuth";
 import { useParams } from "next/navigation";
 import { useState } from "react";
-import { UserInfo } from "./_components/user-info";
 
 export default function TraineePage() {
 	const { id } = useParams();
 	const { isAuthenticated, isLoading, logout } = useAuth();
-	const [isDeleteDialogOpen, setIsDeleteDialogOpen] = useState(false);
+	const [username, setUsername] = useState("トレーニー太郎");
 
 	// 仮のユーザーデータ（実際のアプリケーションではAPIから取得します）
 	const user = {
 		id: id,
-		username: "トレーニー太郎",
+		username: username,
 		avatarUrl: "/placeholder.svg?height=100&width=100",
 		trainingData: [
 			{ date: "2025-06-01", count: 2 },
@@ -50,47 +39,18 @@ export default function TraineePage() {
 	const handleDeleteAccount = () => {
 		// アカウント削除の処理をここに実装
 		console.log("アカウントを削除しました");
-		setIsDeleteDialogOpen(false);
 	};
 
 	return (
 		<div className="container mx-auto px-4 py-8">
-			<UserInfo username={user.username} avatarUrl={user.avatarUrl} />
+			<UserInfo
+				username={user.username}
+				avatarUrl={user.avatarUrl}
+				onLogout={handleLogout}
+				onDeleteAccount={handleDeleteAccount}
+			/>
+			<WeeklyGoal trainingData={user.trainingData} />
 			<TrainingHeatmap trainingData={user.trainingData} />
-
-			{true && (
-				<div className="mt-8 space-y-4">
-					<Button onClick={handleLogout} variant="outline">
-						ログアウト
-					</Button>
-					<div>
-						<AlertDialog
-							open={isDeleteDialogOpen}
-							onOpenChange={setIsDeleteDialogOpen}
-						>
-							<AlertDialogTrigger asChild>
-								<Button variant="destructive">アカウントを削除</Button>
-							</AlertDialogTrigger>
-							<AlertDialogContent>
-								<AlertDialogHeader>
-									<AlertDialogTitle>
-										本当にアカウントを削除しますか？
-									</AlertDialogTitle>
-									<AlertDialogDescription>
-										この操作は取り消せません。すべてのデータが永久に削除されます。
-									</AlertDialogDescription>
-								</AlertDialogHeader>
-								<AlertDialogFooter>
-									<AlertDialogCancel>キャンセル</AlertDialogCancel>
-									<AlertDialogAction onClick={handleDeleteAccount}>
-										削除する
-									</AlertDialogAction>
-								</AlertDialogFooter>
-							</AlertDialogContent>
-						</AlertDialog>
-					</div>
-				</div>
-			)}
 		</div>
 	);
 }
